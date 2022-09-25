@@ -16,6 +16,5 @@ services:
       - 3306:3306
   admin:
     image: adminer
-    restart: always
     ports:
       - 8080:8080

@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Booking extends Model
 {
+    protected $table = 'booking';
+
     protected $fillable = [
-        'created_at',
         'stopped_on',
         'status',
         'user_id',
@@ -26,5 +27,27 @@ class Booking extends Model
             1 => 'Подтверждена',
         ];
         return $statuses[$value];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @param array $options
+     * @return string
+     */
+    public function save(array $options = []) {
+        $result = parent::save();
+        switch ($result) {
+            case 1:
+                return 'Success';
+                break;
+            
+            default:
+                return 'Error';
+                break;
+        }
     }
 }
