@@ -19,7 +19,7 @@ class CreateBookingTable extends Migration
             $table->dateTime('created_at')
                 ->useCurrent();
 
-            $table->date('stopped_on')
+            $table->date('stayed_on')
                 ->nullable();
 
             $table->boolean('status');
