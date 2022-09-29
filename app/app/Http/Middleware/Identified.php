@@ -18,9 +18,9 @@ class Identified
     public function handle(Request $request, Closure $next)
     {
         try {
-            User::findOrFail($request->header('user_id'));
+            User::findOrFail($request->input('user_id'));
         } catch (\Throwable $th) {
-            header_remove('user_id');
+            $request->merge(['user_id' => null]);
         }
         return $next($request);
     }
