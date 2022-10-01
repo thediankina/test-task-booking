@@ -11,9 +11,7 @@ Route::middleware('retrieved')
     ->group(function() {
         Route::get('/{id}', [BookingController::class, 'view']);
         Route::get('/delete/{id}', [BookingController::class, 'delete']);
-        Route::post('/update/{id}', [BookingController::class, 'update'])
-            ->middleware('identified');
+        Route::post('/update/{id}', [BookingController::class, 'update']);
 });
 
-Route::post('/create', [BookingController::class, 'create'])
-    ->middleware('identified');
+Route::post('/create', [BookingController::class, 'create']);

@@ -9,11 +9,7 @@ class BookingController extends Controller
 {
     public function all(Request $request)
     {
-        $params = [
-            'limit' => $request->input('limit'),
-            'offset' => $request->input('offset'),
-            'status' => $request->input('status'),
-        ];
+        $params = $request->params;
         $booking = $this->paginate(Booking::all(), $params);
         return response($this->encode($booking));
     }
@@ -26,7 +22,8 @@ class BookingController extends Controller
 
     public function create(Request $request)
     {
-        $booking = new Booking($request->all());
+        $data = $request->all();
+        $booking = new Booking($data);
         return response($booking->save());
     }
 
