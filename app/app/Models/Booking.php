@@ -32,6 +32,15 @@ class Booking extends Model
     }
 
     /**
+     * @param string $value
+     * @return void
+     */
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = array_search($value, $this->statuses);
+    }
+
+    /**
      * @return BelongsTo
      */
     public function user()
@@ -57,6 +66,7 @@ class Booking extends Model
     }
 
     /**
+     * @param int $value
      * @return string
      */
     private function getReadableBoolean($value)

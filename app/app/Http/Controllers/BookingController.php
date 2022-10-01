@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function all()
+    public function all(Request $request)
     {
-        $booking = Booking::all();
+        $params = [
+            'limit' => $request->input('limit'),
+            'offset' => $request->input('offset'),
+            'status' => $request->input('status'),
+        ];
+        $booking = $this->paginate(Booking::all(), $params);
         return response($this->encode($booking));
     }
 

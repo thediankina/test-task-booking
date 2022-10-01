@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -18,5 +19,21 @@ class Controller extends BaseController
     protected function encode($data)
     {
         return json_encode($data, 256);
+    }
+
+    /**
+     * @param Collection $collection
+     * @param array $params
+     * @return mixed
+     */
+    protected function paginate($collection, $params)
+    {
+        $partial = $collection
+            ->limit($params['limit'])
+            ->offset($params['offset'])
+            ->get();
+        
+        return $partial
+            ->filter(fn ($booking) => $booking->status == $params['status']);
     }
 }
