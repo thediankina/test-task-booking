@@ -15,7 +15,7 @@ services:
       MYSQL_DATABASE: main
     ports:
       - 3306:3306
-  admin:
+  adminer:
     image: adminer
     ports:
       - 8080:8080
