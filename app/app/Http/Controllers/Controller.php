@@ -29,6 +29,7 @@ class Controller extends BaseController
     protected function paginate($collection, $params)
     {
         $partial = $collection
+            ->toQuery()
             ->limit($params['limit'])
             ->offset($params['offset'])
             ->get();
